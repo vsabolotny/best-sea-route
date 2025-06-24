@@ -1,0 +1,72 @@
+openapi: 3.0.0
+info:
+  title: AIS Seafreight API
+  version: "0.1.0"
+  description: REST API for accessing MarineTraffic AIS data
+paths:
+  /vessels/{imo}/position:
+    get:
+      summary: Get current position of vessel
+      parameters:
+        - name: imo
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: IMO number of the vessel
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  imo:
+                    type: integer
+                  latitude:
+                    type: number
+                  longitude:
+                    type: number
+                  timestamp:
+                    type: string
+        '404':
+          description: Position not found
+        '500':
+          description: Server error
+
+  /vessels/{imo}/distance-to-port:
+    get:
+      summary: Get distance from current position to Hamburg port
+      parameters:
+        - name: imo
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: IMO number of the vessel
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  imo:
+                    type: integer
+                  from_position:
+                    type: object
+                    properties:
+                      lat: { type: number }
+                      lon: { type: number }
+                  to_port:
+                    type: object
+                    properties:
+                      name: { type: string }
+                      lat: { type: number }
+                      lon: { type: number }
+                  distance_nm:
+                    type: number
+        '500':
+          description: Server error
