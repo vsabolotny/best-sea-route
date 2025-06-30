@@ -16,3 +16,7 @@ A FastAPI-based web service to find the best sea route between ports.
 ## Setup
 
 1. Clone the repository:
+
+## Marinetraffic API
+
+https://servicedocs.marinetraffic.com/tag/Routing-Information/#operation/exportroutes
